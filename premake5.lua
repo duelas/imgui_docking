@@ -19,10 +19,10 @@ project "ImGui"
 		"imstb_textedit.h",
 		"imstb_truetype.h",
 		"imgui_demo.cpp",
-		"imgui_impl_glfw.h",
-		"imgui_impl_glfw.cpp",
-		"imgui_impl_vulkan.h",
-		"imgui_impl_vulkan.cpp"		
+		"backends/imgui_impl_glfw.h",
+		"backends/imgui_impl_glfw.cpp",
+		"backends/imgui_impl_vulkan.h",
+		"backends/imgui_impl_vulkan.cpp"		
 	}
 	
 	includedirs
