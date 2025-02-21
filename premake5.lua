@@ -31,14 +31,23 @@ project "ImGui"
 		"%{IncludeDir.VulkanSDK}"
 	}
 	
+	postbuildcommands
+	{
+		"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""
+	}
+	
 	filter "system:windows"
 		systemversion "latest"
-		cppdialect "C++17"
+		cppdialect "C++20"
+		
+	filter "system:macos"
+		systemversion "latest"
+		cppdialect "C++20"
 
 	filter "system:linux"
 		pic "On"
 		systemversion "latest"
-		cppdialect "C++17"
+		cppdialect "C++20"
 
 	filter "configurations:Debug"
 		runtime "Debug"
