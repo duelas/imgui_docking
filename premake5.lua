@@ -3,8 +3,8 @@ project "ImGui"
 	language "C++"
     staticruntime "off"
 
-	targetdir ("bin/%{cfg.system}-%{cfg.architecture}/%{prj.name}")
-	objdir ("bin-int/%{cfg.system}-%{cfg.architecture}/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -31,41 +31,27 @@ project "ImGui"
 		"%{IncludeDir.VulkanSDK}"
 	}
 	
-	postbuildcommands
-	{
-		"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""
-	}
-	
 	filter "system:windows"
 		systemversion "latest"
-		cppdialect "C++20"
-		
-	filter "system:macos"
-		systemversion "latest"
-		cppdialect "C++20"
+		cppdialect "C++17"
 
 	filter "system:linux"
 		pic "On"
 		systemversion "latest"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		
-	filter "configurations:Editor_Debug"
-		runtime "Debug"
-		symbols "On"		
-	
-	filter "configurations:Editor_Release"
-		runtime "Debug"
-		optimize "on"
-
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
-
+		postbuildcommands	{	"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""	}
+		
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
-
+		postbuildcommands	{	"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""	}
+		
     filter "configurations:Dist"
 		runtime "Release"
 		optimize "on"
-        symbols "off"
+        symbols "off"		
+		postbuildcommands	{	"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""	}
