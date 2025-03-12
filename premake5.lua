@@ -40,6 +40,17 @@ project "ImGui"
 		systemversion "latest"
 		cppdialect "C++17"
 		
+		
+	filter "configurations:Editor_Debug"
+		runtime "Debug"
+		symbols "On"		
+		
+	filter "configurations:Editor_Release"
+		runtime "Release"
+		optimize "On"
+		symbols "off"
+		
+		
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
