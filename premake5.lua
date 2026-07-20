@@ -1,10 +1,17 @@
 project "ImGui"
 	kind "StaticLib"
 	language "C++"
-    staticruntime "off"
+    	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	configmap{
+		["Editor_Debug"] = "Debug",
+		["Editor_Release"] = "Release",
+		["Editor_Debug_NoConsole"] = "Debug",
+		["Editor_Release_NoConsole"] = "Release"
+	}
 
 	files
 	{
@@ -23,8 +30,8 @@ project "ImGui"
 		"backends/imgui_impl_glfw.cpp",
 		"backends/imgui_impl_vulkan.h",
 		"backends/imgui_impl_vulkan.cpp",
-        "imgui_stdlib.h",
-        "imgui_stdlib.cpp"
+        	"imgui_stdlib.h",
+        	"imgui_stdlib.cpp"
 	}
 	
 	includedirs
@@ -41,17 +48,7 @@ project "ImGui"
 		pic "On"
 		systemversion "latest"
 		cppdialect "C++17"
-		
-		
-	filter "configurations:Editor_Debug"
-		runtime "Debug"
-		symbols "On"		
-		
-	filter "configurations:Editor_Release"
-		runtime "Release"
-		optimize "On"
-		symbols "off"
-		
+				
 		
 	filter "configurations:Debug"
 		runtime "Debug"
@@ -63,8 +60,8 @@ project "ImGui"
 		optimize "on"
 		postbuildcommands	{	"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""	}
 		
-    filter "configurations:Dist"
+    	filter "configurations:Dist"
 		runtime "Release"
 		optimize "on"
-        symbols "off"		
+        	symbols "off"		
 		postbuildcommands	{	"{COPYDIR} \"%{cfg.targetdir}/%{prj.name}.lib\" \"%{wks.location}/projectmodule/Lib\""	}
